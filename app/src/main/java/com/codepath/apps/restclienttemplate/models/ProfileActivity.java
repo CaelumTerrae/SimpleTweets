@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.R;
 
 import org.parceler.Parcels;
@@ -27,8 +28,13 @@ public class ProfileActivity extends AppCompatActivity {
         tvFollowing = findViewById(R.id.tvFollowing);
 
         //load the number of followers into the followers and following.
-        tvFollowers.setText(user.followerCount);
-        tvFollowing.setText(user.followingCount);
+
+
+        String followerCount = Integer.toString(user.followerCount) + " followers";
+        tvFollowers.setText(followerCount);
+        String followingCount = Integer.toString(user.followingCount) + " following";
+        tvFollowing.setText(followingCount);
+        Glide.with(this).load(user.profileImageUrl).into(ivProfilePicture);
 
     }
 }

@@ -24,11 +24,15 @@ public class Tweet {
         tweet.UID = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        tweet.hasMedia = false;
+        JSONArray media = null;
 
 
         JSONObject entities = jsonObject.getJSONObject("entities");
-        JSONArray media = entities.getJSONArray("media");
-        tweet.hasMedia = media != null;
+        if (entities.has("media")) {
+            media = entities.getJSONArray("media");
+            tweet.hasMedia = true;
+        }
         if(tweet.hasMedia){
             //iterate over the media to find an image;
             for (int i = 0; i < media.length(); i++){
